@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Chat Cleaner</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>AI Chat Cleaner <span id="ver" class="ver"></span></h1>
+    <span id="site" class="chip">Not on a supported site</span>
+  </header>
+
+  <main>
+    <p id="unsupported" class="muted">
+      Open ChatGPT, Gemini or Claude in this tab, then open this popup again.
+    </p>
+
+    <div id="app" hidden>
+      <section class="card" aria-label="Settings">
+        <h2>Settings</h2>
+        <label class="setting">
+          <input type="checkbox" id="keepPinned" checked>
+          <span class="setting-body">
+            <span id="keepLabel" class="setting-title">Keep pinned chats</span>
+            <span class="muted small setting-hint" id="keepHint"></span>
+          </span>
+        </label>
+        <div class="setting setting-stacked" id="speedRow" hidden>
+          <label class="setting-title" for="speed">Speed</label>
+          <select id="speed">
+            <option value="paced" selected>Paced — ~5 s/chat</option>
+            <option value="fast">Fast — bursts of ~1 s/chat</option>
+            <option value="gentle">Gentle — ~13 s/chat</option>
+          </select>
+          <span class="muted small setting-hint" id="speedHint"></span>
+        </div>
+      </section>
+
+      <section class="card" aria-label="Bulk delete">
+        <h2>Bulk delete</h2>
+        <div class="choices segmented seg-4" role="radiogroup" aria-label="How many chats to delete">
+          <label class="choice"><input type="radio" name="amount" value="10"><span class="choice-title">10</span><span class="choice-sub">chats</span></label>
+          <label class="choice"><input type="radio" name="amount" value="50"><span class="choice-title">50</span><span class="choice-sub">chats</span></label>
+          <label class="choice"><input type="radio" name="amount" value="100" checked><span class="choice-title">100</span><span class="choice-sub">chats</span></label>
+          <label class="choice"><input type="radio" name="amount" value="all"><span class="choice-title">All</span><span class="choice-sub">everything</span></label>
+        </div>
+        <button id="bulkBtn" class="danger block" type="button">Delete…</button>
+
+        <div id="confirmBox" class="confirm" hidden>
+          <p id="confirmText"></p>
+          <input id="confirmInput" type="text" autocomplete="off" placeholder="Type DELETE to confirm" hidden>
+          <div class="row">
+            <button id="confirmYes" class="danger" type="button">Confirm delete</button>
+            <button id="confirmNo" type="button">Cancel</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="statusBox" hidden aria-label="Progress">
+        <div class="status-head">
+          <h2>Progress</h2>
+          <button id="stopBtn" type="button">Stop</button>
+        </div>
+        <div class="progress" aria-hidden="true"><div id="statusBar"></div></div>
+        <p id="statusText"></p>
+      </section>
+
+      <section class="card" aria-label="Individual chats">
+        <div class="status-head">
+          <h2>Individual chats</h2>
+        </div>
+        <div class="row">
+          <button id="scanBtn" type="button">Refresh list</button>
+          <button id="moreBtn" type="button">Load older</button>
+        </div>
+        <p id="listNote" class="muted small"></p>
+        <ul id="list"></ul>
+      </section>
+    </div>
+
+    <p id="msg" role="status"></p>
+  </main>
+
+  <script src="../src/selectors.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
