@@ -168,7 +168,7 @@ async function startBulk() {
     const scan = await send({ type: "scan" });
     if (!scan || !scan.ok || !(scan.chats || []).length) {
       $("confirmBox").hidden = true;
-      setMsg("Nothing to delete — the sidebar has no chats loaded.", true);
+      setMsg("Nothing to delete: the sidebar has no chats loaded.", true);
       return;
     }
     $("confirmBox").hidden = true;
@@ -195,7 +195,7 @@ async function startBulk() {
 const PHASES = {
   loading: "Loading chats…",
   deleting: "Deleting…",
-  paused: "Paused — ChatGPT is throttling…",
+  paused: "Paused: ChatGPT is throttling…",
   done: "Done.",
   stopped: "Stopped.",
   error: "Stopped with an error.",

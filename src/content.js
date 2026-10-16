@@ -672,7 +672,7 @@
     const label = {
       loading: "Loading chats…",
       deleting: state.stop ? "Stopping…" : "Deleting…",
-      paused: "Paused — the site is throttling deletes…",
+      paused: "Paused: the site is throttling deletes…",
       done: "Done.",
       stopped: "Stopped.",
       error: "Stopped with an error.",
